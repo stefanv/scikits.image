@@ -26,6 +26,10 @@ this path to your PYTHONPATH variable and compiling the extensions::
 
   python setup.py build_ext -i
 
+Soon, we'll move from distutils to the self-contained `bento
+<http://cournape.github.com/Bento>` as a build system. The configuration
+should already be functional; run "make bento" to build in-place.
+
 License
 -------
 Please read LICENSE.txt in this directory.
