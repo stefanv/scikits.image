@@ -43,7 +43,7 @@ ExtraSourceFiles:
     doc/source/conf.py,
     doc/source/contents.txt,
     doc/source/contribute.txt,
-    doc/source/gitwash/*.txt
+    doc/source/gitwash/*.txt,
     doc/source/index.txt,
     doc/source/install.txt,
     doc/source/license.txt,
