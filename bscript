@@ -1,9 +1,9 @@
 import sys
 import os
 
-#from numpy.distutils.misc_util \
-#    import \
-#        get_numpy_include_dirs
+from numpy.distutils.misc_util \
+    import \
+        get_numpy_include_dirs
 
 from bento.commands.hooks \
     import \
@@ -70,4 +70,5 @@ def startup():
 def myconfigure(ctx):
     cfg = yaku.context.get_cfg()
     cfg.use_tools(["cython"])
+    cfg.env["CPPPATH"].extend(get_numpy_include_dirs())
     cfg.store()
