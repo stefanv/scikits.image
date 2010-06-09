@@ -1,0 +1,73 @@
+import sys
+import os
+
+#from numpy.distutils.misc_util \
+#    import \
+#        get_numpy_include_dirs
+
+from bento.commands.hooks \
+    import \
+        post_configure, register_command
+from bento.commands.core \
+    import \
+        Command, Option
+from bento.commands.errors \
+    import \
+        CommandExecutionFailure
+
+import yaku.context
+
+class TestCommand(Command):
+    long_descr = """\
+Purpose: run the test suite
+Usage: bentomaker test [OPTIONS]"""
+    short_descr = "Run the test suite"
+
+    def run(self, ctx):
+        sys.path.insert(0, os.getcwd())
+        from scikits.image import test
+
+        self.set_option_parser()
+        o, a = self.parser.parse_args(ctx.cmd_opts)
+        if o.help:
+            self.parser.print_help()
+            return
+
+        try:
+            test()
+        except SystemExit:
+            raise CommandExecutionFailure()
+
+class BuildHtmlDoc(Command):
+    long_descr = """\
+Purpose: build the html documentation
+Usage: bentomaker build-doc [OPTIONS]"""
+    short_descr = "Build the html doc"
+
+    def run(self, ctx):
+        self.set_option_parser()
+        o, a = self.parser.parse_args(ctx.cmd_opts)
+        if o.help:
+            self.parser.print_help()
+            return
+
+        self._build_doc()
+
+    def _build_doc(self):
+        from sphinx.application import Sphinx
+
+        SRCDIR = os.path.abspath("doc/source")
+        BLDDIR = os.path.abspath("build/doc/html")
+        app = Sphinx(SRCDIR, SRCDIR, BLDDIR, BLDDIR + "/doctrees",
+                     "html", {}, sys.stdout)
+        app.builder.build_all()
+
+def startup():
+    register_command("test", TestCommand)
+    register_command("doc-html", BuildHtmlDoc)
+
+@post_configure
+def myconfigure(ctx):
+    cfg = yaku.context.get_cfg()
+    cfg.use_tools(["cython"])
+    cfg.store()

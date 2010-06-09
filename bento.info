@@ -1,0 +1,132 @@
+Name: scikits.image
+Version: 0.3dev
+Summary: Image processing routines for SciPy
+Url: http://stefanv.github.com/scikits.image
+DownloadUrl: http://github.com/stefanv/scikits.image
+Description:
+    Image Processing SciKit
+    
+    Image processing algorithms for SciPy, including IO, morphology, filtering,
+    warping, color manipulation, object detection, etc.
+    
+    Please refer to the online documentation at
+    http://stefanv.github.com/scikits.image
+Maintainer: Stefan van der Walt
+MaintainerEmail: stefan@sun.ac.za
+License: Modified BSD
+Classifiers:
+    Development Status :: 4 - Beta,
+    Environment :: Console,
+    Intended Audience :: Developers,
+    Intended Audience :: Science/Research,
+    License :: OSI Approved :: BSD License,
+    Topic :: Scientific/Engineering
+HookFile: bscript
+
+ExtraSourceFiles:
+    CONTRIBUTORS.txt,
+    DEPENDS.txt,
+    DEVELOPMENT.txt,
+    LICENSE.txt,
+    Makefile,
+    README.txt,
+    RELEASE.txt,
+    TASKS.txt,
+    doc/Makefile,
+    doc/ext/docscrape.py,
+    doc/ext/docscrape_sphinx.py,
+    doc/ext/numpydoc.py,
+    doc/ext/plot_directive.py,
+    doc/source/_templates/index.html,
+    doc/source/_templates/layout.html,
+    doc/source/api/*.txt,
+    doc/source/conf.py,
+    doc/source/contents.txt,
+    doc/source/contribute.txt,
+    doc/source/gitwash/*.txt
+    doc/source/index.txt,
+    doc/source/install.txt,
+    doc/source/license.txt,
+    doc/source/overview.txt,
+    doc/source/plots/show_collection.py,
+    doc/source/user_guide.txt,
+    doc/source/user_guide/plugins.txt,
+    doc/tools/LICENSE.txt,
+    doc/tools/apigen.py,
+    doc/tools/build_modref_templates.py,
+    scikits/image/graph/_mcp.pxd,
+    scikits/image/graph/heap.pxd,
+    scikits/image/opencv/opencv_backend.pxd,
+    setup.py
+
+DataFiles: $sitedir_scikits_scikits
+    SourceDir: scikits
+    TargetDir: $sitedir/scikits
+    Files:
+        __init__.py
+
+DataFiles: tests
+    SourceDir: scikits/image
+    TargetDir: $sitedir/scikits/image
+    Files:
+        color/tests/*.py,
+        filter/tests/*.py,
+        graph/tests/*.py,
+        io/tests/*.py,
+        morphology/tests/*.py,
+        opencv/tests/*.py,
+        transform/tests/*.py
+
+DataFiles: image_data
+    SourceDir: scikits/image/data
+    TargetDir: $sitedir/scikits/image/data/
+    Files:
+        *.png, *.npy, *.pck, *.tif
+
+DataFiles: io_plugins_config
+    SourceDir: scikits/image/io/_plugins
+    TargetDir: $sitedir/scikits/image/io/_plugins
+    Files:
+        *.ini
+
+Library:
+    Packages:
+        scikits,
+        scikits.image,
+        scikits.image.color,
+        scikits.image.filter,
+        scikits.image.graph,
+        scikits.image.io,
+        scikits.image.io._plugins,
+        scikits.image.morphology,
+        scikits.image.opencv,
+        scikits.image.scripts,
+        scikits.image.transform
+    Extension: scikits.image.graph._mcp
+        Sources:
+            scikits/image/graph/_mcp.pyx
+    Extension: scikits.image.graph.heap
+        Sources:
+            scikits/image/graph/heap.pyx
+    Extension: scikits.image.opencv.opencv_backend
+        Sources:
+            scikits/image/opencv/opencv_backend.pyx
+    Extension: scikits.image.io._plugins._histograms
+        Sources:
+            scikits/image/io/_plugins/_histograms.pyx
+    Extension: scikits.image.graph._spath
+        Sources:
+            scikits/image/graph/_spath.pyx
+    Extension: scikits.image.opencv.opencv_cv
+        Sources:
+            scikits/image/opencv/opencv_cv.pyx
+    Extension: scikits.image.io._plugins._colormixer
+        Sources:
+            scikits/image/io/_plugins/_colormixer.pyx
+    Extension: scikits.image.morphology.cmorph
+        Sources:
+            scikits/image/morphology/cmorph.pyx
+
+Executable: scivi
+    Module: scikits.image.scripts.scivi
+    Function: main
