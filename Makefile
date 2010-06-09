@@ -7,6 +7,10 @@ all:
 clean:
 	find . -name "*.so" | xargs rm
 
+bento:
+	bentomaker configure
+	bentomaker build -i
+
 test:
 	nosetests scikits/image
 
