@@ -1,6 +1,6 @@
 """Image Processing SciKit (Toolbox for SciPy)"""
 
-
+import os
 import os.path as _osp
 
 data_dir = _osp.join(_osp.dirname(__file__), 'data')
@@ -10,7 +10,7 @@ from version import version as __version__
 def _setup_test():
     import functools
 
-    basedir = _osp.dirname(_osp.join(__file__, '../'))
+    basedir = _osp.dirname(_osp.join(_osp.dirname(__file__), os.pardir))
     args = ['', '--exe', '-w', '%s' % basedir]
 
     try:
