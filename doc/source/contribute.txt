@@ -1,2 +1,0 @@
-.. include:: ../../TASKS.txt
-.. include:: ../../DEVELOPMENT.txt
